@@ -6,6 +6,8 @@ import com.cosminflorica.ppmtool.repositories.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProjectService {
     @Autowired
@@ -19,7 +21,6 @@ public class ProjectService {
         } catch (Exception e) {
             throw new ProjectIdException("Project ID '" + project.getProjectIdentifier().toUpperCase() + "' already exists");
         }
-
     }
 
     public Project findProjectByIdentifier(String projectId){
@@ -28,5 +29,9 @@ public class ProjectService {
             throw new ProjectIdException("Project Id "+projectId+" does not exists");
         }
         return project;
+    }
+
+    public Iterable<Project> findAllProjects(){
+        return projectRepository.findAll();
     }
 }
